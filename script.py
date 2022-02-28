@@ -113,7 +113,7 @@ class Property():
         print(f"Monthly expense amount is: ${self.calc_expenses(self.expenses)}")
         print(f"Total investment amount is: ${self.calc_investment(self.investment_cost)}")
         print(f"Monthly Cash Flow: ${self.calc_cash_flow(self.monthly_income, self.monthly_expenses)}")
-        print(f"ROI for this property is: %{self.calc_roi(self.monthly_cash_flow, self.total_investment)}")
+        print(f"ROI for this property is: %{round(self.calc_roi(self.monthly_cash_flow, self.total_investment), 2)}")
 
 
     def make_changes(self):
@@ -144,7 +144,7 @@ class Property():
             self.set_up()
 
         while True:
-            answer = input("What would you like to do?\nSet up property (This will overwrite all previously saved data) ('S')\nMake Changes ('C')\nView Income ('I')\nView Expenses ('E')\nView Cash Flow ('F')\nView ROI ('R')\nQuit ('Q')\n")
+            answer = input("What would you like to do?\nSet up property (This will overwrite all previously saved data) ('S')\nMake Changes ('C')\nView Income ('I')\nView Expenses ('E')\nView Investments ('V')\nView Cash Flow ('F')\nView ROI ('R')\nQuit ('Q')\n")
             if answer.lower() == 'q':
                 break
 
@@ -174,14 +174,18 @@ class Property():
                 print(f"Monthly Cash Flow: ${self.calc_cash_flow(self.monthly_income, self.monthly_expenses)}")
 
             elif answer.lower() == 'v':
-                self.calc_investment(self.investment_cost)
+                print("Investments: ")
+                for key, value in self.investment_cost.items():
+                    if value:
+                        print(f"{key.title()}: ${value}")
+                print(f"Total investment: ${self.calc_investment(self.investment_cost)}")
 
             elif answer.lower() == 'r':
                 self.calc_income(self.income)
                 self.calc_expenses(self.expenses)
                 self.calc_cash_flow(self.monthly_income, self.monthly_expenses)
                 self.calc_investment(self.investment_cost)
-                print(f"ROI for this property is: %{self.calc_roi(self.monthly_cash_flow, self.total_investment)}")
+                print(f"ROI for this property is: %{round(self.calc_roi(self.monthly_cash_flow, self.total_investment), 2)}")
                 
             else:
                 print("Invalid input, please enter one of the options.")
